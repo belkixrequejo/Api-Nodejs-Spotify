@@ -7,9 +7,9 @@ var dbConn  = require('./db');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get("/1/cliente",
-    (req, res) => {
-        dbConn.query('SELECT * FROM cliente_mayor_compras', function(err,rows) {
+app.get("/1/musica",
+    (req, res) => {z
+        dbConn.query('SELECT * FROM canciones_mas_escuchadas', function(err,rows) {
             if(err) {
                res.send(err)
             } else {
@@ -17,9 +17,9 @@ app.get("/1/cliente",
             }
         })
     });
-app.get("/1/producto",
+app.get("/1/usuarios",
     (req, res) => {
-        dbConn.query('SELECT * FROM producto_mas_vendido', function(err,rows) {
+        dbConn.query('SELECT * FROM reporte_ingreso_usuarios_view', function(err,rows) {
             if(err) {
                 res.send(err)
             } else {
@@ -27,7 +27,16 @@ app.get("/1/producto",
             }
         })
     });
-
+app.get("/1/tarjetas",
+    (req, res) => {
+        dbConn.query('SELECT * FROM cantidad_tarjetas_registradas', function(err,rows) {
+            if(err) {
+                res.send(err)
+            } else {
+                res.send(rows)
+            }
+        })
+    });
 
 app.use((req, res) => {
     res.status(404).send({
@@ -38,6 +47,6 @@ app.use((req, res) => {
     })
 });
 
-app.listen(83, () => {
+app.listen(81, () => {
     console.log("Servidor ejecutándose...");
 });
